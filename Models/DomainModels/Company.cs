@@ -21,9 +21,13 @@ namespace ReflowMaritimeTest.Models
 		[Required]
 		public int CountryId { get; set; }
 
+		[Required(AllowEmptyStrings = true)]
+		[StringLength(255)]
 		[EmailAddress]
 		public string Email { get; set; }
 
+		[Required(AllowEmptyStrings = true)]
+		[StringLength(255)]
 		[Phone]
 		public string Phone { get; set; }
 
@@ -32,6 +36,6 @@ namespace ReflowMaritimeTest.Models
 
 		public Country Country { get; set; }
 
-		public IEnumerable<CompanyUsers> CompanyOwners { get; set; }
+		public IEnumerable<CompanyUser> CompanyUsers { get; set; }
 	}
 }

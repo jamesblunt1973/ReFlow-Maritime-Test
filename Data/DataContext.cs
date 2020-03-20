@@ -11,14 +11,20 @@ namespace ReflowMaritimeTest.Data
 		public DbSet<Company> Companies { get; set; }
 		public DbSet<City> Cities { get; set; }
 		public DbSet<Country> Countries { get; set; }
-		public DbSet<CompanyUsers> CompanyOwners { get; set; }
+		public DbSet<CompanyUser> CompanyOwners { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
 
-			modelBuilder.Entity<CompanyUsers>()
+			modelBuilder.Entity<CompanyUser>()
 				.HasKey(a => new { a.CompanyId, a.UserId });
+
+			modelBuilder.Entity<Company>()
+				.HasOne(a => a.Country)
+				.WithMany(a => a.Companies)
+				.HasForeignKey("CountryId")
+				.OnDelete(DeleteBehavior.NoAction);
 			//modelBuilder.Entity<CompanyOwner>()
 			//	.HasOne(a => a.Owner)
 			//	.WithMany(a => a.CompanyOwners)

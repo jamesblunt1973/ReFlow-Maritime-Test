@@ -5,7 +5,7 @@ namespace ReflowMaritimeTest.Models
 	/// <summary>
 	/// This is a join entity
 	/// </summary>
-	public class CompanyUsers
+	public class CompanyUser
 	{
 		[Required]
 		public int CompanyId { get; set; }
