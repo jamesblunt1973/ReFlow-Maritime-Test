@@ -1,5 +1,7 @@
 ﻿.vs/*
 obj/*
+bin/*
+Migrations/*
 wwwroot/*
 ClientApp/node_modules
 ClientApp/dist
