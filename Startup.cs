@@ -28,13 +28,14 @@ namespace ReflowMaritimeTest
 
         public void ConfigureServices(IServiceCollection services)
 		{
-            services.AddControllers(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                                .RequireAuthenticatedUser()
-                                .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            });
+            //services.AddControllers(options =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder()
+            //                    .RequireAuthenticatedUser()
+            //                    .Build();
+            //    options.Filters.Add(new AuthorizeFilter(policy));
+            //});
+            services.AddControllers();
             services.AddCors(options =>
             {
                 options.AddPolicy("cors",
