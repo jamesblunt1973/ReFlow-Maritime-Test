@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44352/api/'
+  apiUrl: 'https://localhost:44352/api/',
+  auth0_config: {
+    "clientId": "V52uqp2itAuUpFZcB74x66JpO0fuISGr",
+    "domain": "reflowmaritime.auth0.com"
+  }
 };
 
 /*

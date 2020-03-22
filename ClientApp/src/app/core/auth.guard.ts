@@ -15,7 +15,6 @@ export class AuthGuard implements CanLoad {
       : boolean | Promise<boolean> | Observable<boolean> {
     return this.auth.isAuthenticated$.pipe(
       tap(loggedIn => {
-        debugger;
         if (!loggedIn) {
           this.auth.login();
         }
