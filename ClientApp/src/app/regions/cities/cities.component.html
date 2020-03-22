@@ -1,0 +1,21 @@
+<div class="panel column">
+  <div class="content">
+    <mat-form-field *ngFor="let city of cities">
+      <input type="text" matInput required [(ngModel)]="city.name" />
+      <button mat-icon-button color="warn" matSuffix title="delete" (click)="deleteCity(city)">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" matSuffix title="update" (click)="updateCity(city)">
+        <mat-icon>done</mat-icon>
+      </button>
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput required placeholder="Name" [(ngModel)]="name" />
+      <button mat-icon-button color="primary" matSuffix title="add city" (click)="addCity(name)">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+  </div>
+</div>

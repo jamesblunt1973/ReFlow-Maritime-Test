@@ -27,5 +27,21 @@ namespace ReflowMaritimeTest.Controllers
 		{
 			return Ok(await repo.CreateNewUser(user));
 		}
+
+		[HttpPut]
+		public async Task<IActionResult> EditUser(User user)
+		{
+			await repo.UpdateUser(user);
+			return NoContent();
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteUser(int id)
+		{
+			var user = await repo.GetUser(id);
+			await repo.DeleteUser(user);
+			return NoContent();
+		}
+
 	}
 }

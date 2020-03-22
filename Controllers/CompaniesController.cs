@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using ReflowMaritimeTest.Data;
 using ReflowMaritimeTest.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ReflowMaritimeTest.Controllers
@@ -34,49 +34,51 @@ namespace ReflowMaritimeTest.Controllers
 				return NotFound();
 			}
 
-			var settings = new JsonSerializerSettings
-			{
-				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-			};
-			var str = JsonConvert.SerializeObject(companyEntity, settings);
-			return new JsonResult(str);
-
-			//var companyUsers = new List<CompanyUser>();
-			//foreach (var companyUser in companyEntity.CompanyUsers)
+			//var settings = new JsonSerializerSettings
 			//{
-			//	companyUsers.Add(new CompanyUser()
-			//	{
-			//		UserId = companyUser.UserId,
-			//		User = new User()
-			//		{
-			//			Id = companyUser.UserId,
-			//			Name = companyUser.User.Name
-			//		}
-			//	});
-			//}
-			//var company = new Company()
-			//{
-			//	Address = companyEntity.Address,
-			//	City = new City()
-			//	{
-			//		Id = companyEntity.CityId,
-			//		Name = companyEntity.City.Name
-			//	},
-			//	CityId = companyEntity.CityId,
-			//	Country = new Country()
-			//	{
-			//		Id = companyEntity.CountryId,
-			//		Name = companyEntity.Country.Name
-			//	},
-			//	CountryId = companyEntity.CountryId,
-			//	Email = companyEntity.Email,
-			//	Name = companyEntity.Name,
-			//	Id = companyEntity.Id,
-			//	Phone = companyEntity.Phone,
-			//	CompanyUsers = companyUsers
+			//	ReferenceLoopHandling = ReferenceLoopHandling.Ignore
 			//};
+			//var str = JsonConvert.SerializeObject(companyEntity, settings);
+			//return new JsonResult(str);
 
-			//return Ok(company);
+			var companyUsers = new List<CompanyUser>();
+			foreach (var companyUser in companyEntity.CompanyUsers)
+			{
+				companyUsers.Add(new CompanyUser()
+				{
+					CompanyId = companyUser.CompanyId,
+					UserId = companyUser.UserId,
+					User = new User()
+					{
+						Id = companyUser.UserId,
+						Name = companyUser.User.Name
+					}
+				});
+			}
+			var company = new Company()
+			{
+				Address = companyEntity.Address,
+				City = new City()
+				{
+					Id = companyEntity.CityId,
+					Name = companyEntity.City.Name,
+					CountryId = companyEntity.CountryId
+				},
+				CityId = companyEntity.CityId,
+				Country = new Country()
+				{
+					Id = companyEntity.CountryId,
+					Name = companyEntity.Country.Name
+				},
+				CountryId = companyEntity.CountryId,
+				Email = companyEntity.Email,
+				Name = companyEntity.Name,
+				Id = companyEntity.Id,
+				Phone = companyEntity.Phone,
+				CompanyUsers = companyUsers
+			};
+
+			return Ok(company);
 		}
 
 		[HttpPut("{id}")]
@@ -109,8 +111,7 @@ namespace ReflowMaritimeTest.Controllers
 		[HttpPost]
 		public async Task<IActionResult> NewCompany(Company company)
 		{
-			var newCompany = await repo.CreateNewCompany(company);
-			return Ok(newCompany.Id);
+			return Ok(await repo.CreateNewCompany(company));
 		}
 
 		[HttpDelete("{id}")]
@@ -126,8 +127,8 @@ namespace ReflowMaritimeTest.Controllers
 			return NoContent();
 		}
 
-		[HttpPost("AddRemoveCompanyUser")]
-		public async Task<IActionResult> AddRemoveCompanyUser(CompanyUser data)
+		[HttpPost("UpdateCompanyUser")]
+		public async Task<IActionResult> UpdateCompanyUser(CompanyUser data)
 		{
 			var companyExists = await CompanyExists(data.CompanyId);
 			if (!companyExists)
@@ -142,7 +143,7 @@ namespace ReflowMaritimeTest.Controllers
 			}
 
 			await repo.AddRemoveCompanyUser(data);
-			return Ok();
+			return NoContent();
 		}
 
 		private async Task<bool> CompanyExists(int id)

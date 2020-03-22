@@ -1,0 +1,42 @@
+<div class="panel column">
+  <div class="header">
+    <b>Companies</b>
+    <mat-icon>business</mat-icon>
+  </div>
+  <div class="content">
+    <mat-card fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let company of companies">
+      {{company.name}}
+      <button mat-raised-button color="accent" (click)="selectCompany(company)">
+        View
+        <mat-icon matSuffix>{{company.expand ? "visibility_off" : "visibility"}}</mat-icon>
+      </button>
+      <div fxFlex="100%" class="company-panel collapse" [ngClass]="{expand: company.expand, collapse: !company.expand}">
+        <mat-spinner diameter="50" *ngIf="company.loading"></mat-spinner>
+        <div *ngIf="company.loaded">
+          <p>{{company.country.name}}, {{company.city.name}}</p>
+          <p>Address: {{company.address}}</p>
+          <p *ngIf="company.email">Email: {{company.email}}</p>
+          <p *ngIf="company.phone">Phone: {{company.phone}}</p>
+          <p>Owners:</p>
+          <ul>
+            <li *ngFor="let companyUser of company.companyUsers">{{companyUser.user.name}}</li>
+          </ul>
+        </div>
+        <div class="actions">
+          <button mat-raised-button color="primary" [routerLink]="['/home/company', { id: company.id }]">
+            Edit
+            <mat-icon matSuffix>edit</mat-icon>
+          </button>
+          <button mat-raised-button color="warn" (click)="deleteCompany(company)">
+            Delete
+            <mat-icon matSuffix>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<button class="btn bottom-btn" mat-icon-button color="accent" routerLink="/home/company">
+  <mat-icon>add_circle</mat-icon>
+</button>

@@ -1,0 +1,24 @@
+<div class="panel column">
+  <div class="content">
+    <mat-form-field *ngFor="let country of countries">
+      <input type="text" matInput required [(ngModel)]="country.name" />
+      <button mat-icon-button color="warn" matSuffix title="delete" (click)="deleteCountry(country)">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" matSuffix title="update" (click)="updateCountry(country)">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" matSuffix title="Maage Cities" [routerLink]="['cities', country.id]">
+        <mat-icon>list</mat-icon>
+      </button>
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput required placeholder="Name" [(ngModel)]="name" />
+      <button mat-icon-button color="primary" matSuffix title="add country" (click)="addCountry(name)">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+  </div>
+</div>

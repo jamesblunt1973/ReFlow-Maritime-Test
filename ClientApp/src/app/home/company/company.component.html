@@ -1,0 +1,56 @@
+<div class="panel column">
+  <div class="content">
+    <form [formGroup]="companyForm" (ngSubmit)="submit()">
+      <mat-form-field>
+        <input type="text" matInput placeholder="Company Name" formControlName="name" required />
+        <mat-error>Name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <mat-select (selectionChange)="getCities($event.value)" formControlName="countryId" required>
+          <mat-option *ngFor="let country of countries" [value]="country.id">{{country.name}}</mat-option>
+        </mat-select>
+        <mat-error>Country is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <mat-select formControlName="cityId" required>
+          <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
+        </mat-select>
+        <mat-error>City is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Email" formControlName="email" />
+        <mat-error>Email is not valid</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Phone" formControlName="phone" />
+      </mat-form-field>
+      <mat-form-field>
+        <textarea type="text" matInput placeholder="Address" formControlName="address" required></textarea>
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!companyForm.valid">Submit</button>
+        <button type="reset" mat-raised-button color="warn">Reset Form</button>
+      </p>
+    </form>
+
+    <p>Controls indicated with asterisk (*) are required.</p>
+
+  </div>
+</div>
+
+<div class="panel column users-panel" *ngIf="companyId">
+  <div class="header">
+    Company Owners
+    <mat-icon>supervisor_account</mat-icon>
+  </div>
+  <div class="content">
+    <mat-selection-list (selectionChange)="updateOwner($event)">
+      <mat-list-option *ngFor="let user of users" [value]="user.id" [selected]="user.selected">
+        {{user.name}}
+      </mat-list-option>
+    </mat-selection-list>
+    <p>Changes applied automatically.</p>
+  </div>
+</div>

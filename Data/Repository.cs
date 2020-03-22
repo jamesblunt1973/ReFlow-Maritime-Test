@@ -133,13 +133,13 @@ namespace ReflowMaritimeTest.Data
 			return await context.Users.ToListAsync();
 		}
 
-		public async Task<User> CreateNewUser(User user)
+		public async Task<int> CreateNewUser(User user)
 		{
 			try
 			{
 				context.Users.Add(user);
 				await context.SaveChangesAsync();
-				return user;
+				return user.Id;
 			}
 			catch (Exception ex)
 			{
@@ -154,9 +154,141 @@ namespace ReflowMaritimeTest.Data
 			return await context.Countries.ToListAsync();
 		}
 
+		public async Task<Country> GetCountry(int id)
+		{
+			return await context.Countries.FindAsync(id);
+		}
+
 		public async Task<IEnumerable<City>> GetCities(int id)
 		{
 			return await context.Cities.Where(a => a.CountryId == id).ToListAsync();
+		}
+
+		public async Task<City> GetCity(int id)
+		{
+			return await context.Cities.FindAsync(id);
+		}
+
+		public async Task<int> CreateNewCountry(Country country)
+		{
+			try
+			{
+				context.Countries.Add(country);
+				await context.SaveChangesAsync();
+				return country.Id;
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
+		}
+
+		public async Task<int> CreateNewCity(City city)
+		{
+			try
+			{
+				context.Cities.Add(city);
+				await context.SaveChangesAsync();
+				return city.Id;
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
+		}
+
+		public async Task UpdateUser(User user)
+		{
+			try
+			{
+				context.Entry(user).State = EntityState.Modified;
+				await context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
+		}
+
+		public async Task DeleteUser(User user)
+		{
+			try
+			{
+				context.Entry(user).State = EntityState.Deleted;
+				await context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
+		}
+
+		public async Task UpdateCountry(Country country)
+		{
+			try
+			{
+				context.Entry(country).State = EntityState.Modified;
+				await context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
+		}
+
+		public async Task UpdateCity(City city)
+		{
+			try
+			{
+				context.Entry(city).State = EntityState.Modified;
+				await context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
+		}
+
+		public async Task DeleteCountry(Country country)
+		{
+			try
+			{
+				context.Entry(country).State = EntityState.Deleted;
+				await context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
+		}
+
+		public async Task DeleteCity(City city)
+		{
+			try
+			{
+				context.Entry(city).State = EntityState.Deleted;
+				await context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				var errorMsg = ex.GetExceptionMessage();
+				logger.LogError(errorMsg);
+				throw new Exception(errorMsg);
+			}
 		}
 	}
 }

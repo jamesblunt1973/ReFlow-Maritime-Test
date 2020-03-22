@@ -3,5 +3,6 @@ obj/*
 bin/*
 Migrations/*
 wwwroot/*
+Logs/*
 ClientApp/node_modules
 ClientApp/dist

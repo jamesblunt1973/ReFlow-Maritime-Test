@@ -1,0 +1,35 @@
+.mat-card {
+  margin-bottom: 10px;
+
+  button {
+    margin-left: auto;
+  }
+}
+
+.company-panel {
+  overflow: hidden;
+
+  &.expand {
+    height: auto;
+  }
+
+  &.collapse {
+    height: 0;
+  }
+
+  mat-spinner {
+    margin: 0 auto;
+  }
+
+  ul {
+    margin-left: 30px;
+  }
+
+  .actions {
+    margin-top: 10px;
+
+    button {
+      margin-right: 10px;
+    }
+  }
+}

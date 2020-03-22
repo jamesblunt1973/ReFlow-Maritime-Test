@@ -1,1 +1,139 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'theme.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 12px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.01);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #919191;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 110, 112, .15);
+}
+
+input[dir='ltr'] {
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+}
+
+.panel {
+  border: 1px solid rgba(0,0,0,.03);
+  box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
+  margin: 0 auto;
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    color: $darkGray;
+    background: $veryLightGray;
+
+    .mat-icon {
+      margin-left: auto;
+    }
+  }
+
+  .content {
+    padding: 20px;
+    background-color: #fff;
+  }
+
+  .commands {
+    margin-top: 20px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  &.column {
+    width: 480px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 50%;
+
+  &.btn-primary {
+    color: $primary;
+  }
+
+  &.btn-warn {
+    color: $warn;
+  }
+
+  &.btn-accent {
+    color: $accent;
+  }
+
+  &.bottom-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    /*    .mat-button-ripple {
+      width: 48px;
+      height: 48px;
+    }*/
+    mat-icon {
+      @include md-icon-size(42px);
+    }
+  }
+
+  &.btn-large {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.btn-small {
+    width: 16px;
+    height: 18px;
+  }
+}
+
+.success-snack-bar {
+  background-color: $accent;
+}
+
+.warn-snack-bar {
+  background-color: $warn;
+}
+
+.error-snack-bar {
+  background-color: $error;
+}
+
+.full-dialog-container .mat-dialog-container {
+  padding: 0;
+}

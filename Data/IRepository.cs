@@ -15,8 +15,18 @@ namespace ReflowMaritimeTest.Data
 		Task AddRemoveCompanyUser(CompanyUser companyUser);
 		Task<User> GetUser(int id);
 		Task<IEnumerable<User>> GetUsers();
-		Task<User> CreateNewUser(User user);
+		Task<int> CreateNewUser(User user);
 		Task<IEnumerable<Country>> GetCountries();
+		Task<Country> GetCountry(int id);
 		Task<IEnumerable<City>> GetCities(int id);
+		Task<City> GetCity(int id);
+		Task<int> CreateNewCountry(Country country);
+		Task<int> CreateNewCity(City city);
+		Task UpdateUser(User user);
+		Task UpdateCountry(Country country);
+		Task UpdateCity(City city);
+		Task DeleteUser(User user);
+		Task DeleteCountry(Country country);
+		Task DeleteCity(City city);
 	}
 }

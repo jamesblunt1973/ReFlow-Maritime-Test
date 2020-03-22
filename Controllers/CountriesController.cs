@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReflowMaritimeTest.Data;
+using ReflowMaritimeTest.Models;
 using System.Threading.Tasks;
 
 namespace ReflowMaritimeTest.Controllers
@@ -21,10 +22,26 @@ namespace ReflowMaritimeTest.Controllers
             return Ok(await repo.GetCountries());
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCities(int id)
+        [HttpPost]
+        public async Task<IActionResult> NewCountry(Country country)
         {
-            return Ok(await repo.GetCities(id));
-        } 
+            return Ok(await repo.CreateNewCountry(country));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCountry(Country country)
+        {
+            await repo.UpdateCountry(country);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCountry(int id)
+        {
+            var country = await repo.GetCountry(id);
+            await repo.DeleteCountry(country);
+            return NoContent();
+        }
+
     }
 }

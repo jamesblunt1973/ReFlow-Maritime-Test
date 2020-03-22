@@ -23,12 +23,12 @@ namespace ReflowMaritimeTest.Models
 
 		[Required(AllowEmptyStrings = true)]
 		[StringLength(255)]
-		[EmailAddress]
+		// [EmailAddress]
 		public string Email { get; set; }
 
 		[Required(AllowEmptyStrings = true)]
 		[StringLength(255)]
-		[Phone]
+		// [Phone]
 		public string Phone { get; set; }
 
 		// Navigation Properties
